@@ -7,9 +7,9 @@ DogPrint
 This project is a starting point for a Flutter application.
 
 Integrantes:
--Jordy Medina
--Ana Carrion
--Leonardo Gomez
+-[Jordy Medina]
+-[Ana Carrion]
+-[Leonardo Gomez]
 
 ------
 - [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
