@@ -1,6 +1,5 @@
 
 import 'package:dogprint/Mascotas.dart';
-import 'package:dogprint/Pets.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 
@@ -9,7 +8,6 @@ class Profile extends StatefulWidget{
   ProfileState createState()=> ProfileState();
 }
 class ProfileState extends State<Profile>{
-  var pet=new Pets("Peluche",3,"img/c1.jpg","French Poodle");
   final profileImg='img/c1.jpg';
   @override
   Widget build(BuildContext context) {
@@ -22,7 +20,9 @@ class ProfileState extends State<Profile>{
           Divider(),
           Text("Mascotas",style: TextStyle(fontSize: 20), textAlign: TextAlign.justify,),
           Expanded(
-            child: Mascotas(),
+            child: Container(
+              child: Mascotas(),
+            ),
           )
         ],
       ),
@@ -92,14 +92,40 @@ class ProfileState extends State<Profile>{
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              FloatingActionButton(onPressed:_launchCaller,child: Icon(Icons.call),backgroundColor: Colors.green, tooltip: "Llamar a esta persona",),
-              FloatingActionButton(child: Icon(Icons.add,),backgroundColor: Colors.green, tooltip: "Agregar una Mascota",),
-              FloatingActionButton(child: Icon(Icons.settings),backgroundColor: Colors.green, tooltip: "Ajustes",),
+              FloatingActionButton(heroTag: '1',onPressed:_launchCaller,child: Icon(Icons.call),backgroundColor: Colors.green, tooltip: "Llamar a esta persona",),
+              FloatingActionButton(heroTag: '2',child: Icon(Icons.add,),backgroundColor: Colors.green, tooltip: "Agregar una Mascota",),
+              FloatingActionButton(heroTag: '3',onPressed: _showSettings,child: Icon(Icons.settings),backgroundColor: Colors.green, tooltip: "Ajustes",),
     ],),
           ],
     ),
     );
- }
+ }void _showSettings(){
+    showModalBottomSheet(context: context, builder: (context){
+      return Container(
+          color: Color(0xFF737373),
+          height: 80,
+          child: Container(
+            child: _options(),
+            decoration: BoxDecoration(
+            color: Theme.of(context).canvasColor, borderRadius: BorderRadius.only(topLeft: const Radius.circular(10) ,topRight: const Radius.circular(10) )
+        ),
+      ));
+    });
+  }
+  Column _options(){
+    return Column(
+      children: <Widget>[
+        ListTile(
+          leading: Icon(Icons.close),
+          title: Text("Salir"),
+          onTap: ()=>{
+            Navigator.pushNamed(context, '/login'),
+          },
+        ),
+
+      ],
+    );
+  }
 
 
 

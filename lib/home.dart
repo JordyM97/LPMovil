@@ -1,4 +1,5 @@
-import 'package:dogprint/BNavigationBar.dart';
+
+import 'package:dogprint/login.dart';
 import 'package:flutter/material.dart';
 
 
@@ -13,7 +14,8 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    return  BNavigationBar();
+    return
+      Login();
 
   }
 

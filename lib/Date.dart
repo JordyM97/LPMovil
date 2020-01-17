@@ -13,6 +13,7 @@ class DateState extends State<Date>{
       body: new ListView(
           children: <Widget>[
             buildHeader(),
+
           ], ),
     );
   }
@@ -40,24 +41,6 @@ class DateState extends State<Date>{
 
     );
   }
-  Widget buildDates(){
-    return ListView(
-      children: <Widget>[
-        buildCard(),
-      ],
-    );
-  }
-  Widget buildCard(){
 
-    return Container(
-      width: 300,
-
-      child: Column(
-        children: <Widget>[
-          Text("Cita 1"),
-        ],
-      ),
-    );
-  }
 }
 

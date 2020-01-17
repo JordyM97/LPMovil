@@ -26,6 +26,7 @@ dependencies:
   carousel_pro: ^0.0.13
   flutter_swiper: ^1.1.6
   url_launcher: ^5.4.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

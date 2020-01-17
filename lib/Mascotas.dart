@@ -31,7 +31,7 @@ class MascotasState extends State<Mascotas>{
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
         itemBuilder: (BuildContext context, int index){
           return Mascota(
-            nombre: list[index]['name'],
+            name: list[index]['name'],
             edad: list[index]['edad'],
             img: list[index]['img'],
             raza: list[index]['raza'],

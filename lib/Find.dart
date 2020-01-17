@@ -16,10 +16,8 @@ class FindState extends State<Find>{
       body: Column(
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
-            Expanded(
-                child: buildSwiper(),
-                flex: 2,
-              ),
+            //Expanded(
+             //   child: buildSwiper(),flex: 3,              ),
               Flexible(
                 child: Text(
                   "Categorias",
@@ -28,10 +26,11 @@ class FindState extends State<Find>{
               ),
               Flexible(
                 child: buildSubcategories(),
-                flex: 1,
+                flex: 2,
                 fit: FlexFit.tight,
               ),
               Expanded(
+                flex: 5,
                 child: Text("contenido"),
               ),
             ]

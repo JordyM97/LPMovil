@@ -24,6 +24,7 @@ class _BNavigationBat extends State<BNavigationBar>{
     return new Scaffold(
       body: _children[_currentIndex],
       bottomNavigationBar: new BottomNavigationBar(
+          selectedItemColor: Colors.green,
           onTap: onTappedBar,
           currentIndex:_currentIndex,
           items:[
