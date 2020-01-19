@@ -13,19 +13,27 @@ class ProfileState extends State<Profile>{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: null,
-      body:Column(
-        children: <Widget>[
-          buildHeader(),
-          buildOptions(),
-          Divider(),
-          Text("Mascotas",style: TextStyle(fontSize: 20), textAlign: TextAlign.justify,),
-          Expanded(
-            child: Container(
-              child: Mascotas(),
-            ),
-          )
-        ],
-      ),
+      body:Container(
+        decoration: BoxDecoration(
+            boxShadow: [BoxShadow( color: Colors.black54, blurRadius: 0.0)],
+            borderRadius: BorderRadius.all(Radius.circular(0)),gradient: LinearGradient(
+            begin:Alignment.centerRight,end:Alignment.bottomLeft,
+            colors: [Colors.black87,Colors.black54, Colors.black45])
+        ),
+        child: Column(
+          children: <Widget>[
+            buildHeader(),
+            buildOptions(),
+            Divider(),
+            Text("Mascotas",style: TextStyle(fontSize: 20,color: Colors.white,), textAlign: TextAlign.justify,),
+            Expanded(
+              child: Container(
+                child: Mascotas(),
+              ),
+            )
+          ],
+        ),
+      )
 
 
     );
@@ -43,25 +51,18 @@ class ProfileState extends State<Profile>{
             alignment: Alignment.bottomCenter,
             children: <Widget>[
               Row(
-                children: <Widget>[
-                  Flexible(
-                    child: Container(
-                      height: MediaQuery.of(context).size.height / 5,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: AssetImage('img/bck.jpg'),
-                        )
-                      ),
-                    ),
-                  )
-                ],
-              ),
+                //children: <Widget>[
+                 // Flexible(
+                  //  child: Container(
+                   //   height: MediaQuery.of(context).size.height / 5,         decoration: BoxDecoration(
+                    //      image: DecorationImage(                    fit: BoxFit.cover,      image: AssetImage('img/bck.jpg'),
+                    //      )),),)],
+          ),
               Positioned(
                 top:MediaQuery.of(context).size.height / 18,
                 child: Container(                  height: 190, width: 190, decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    border: Border.all(color: Colors.white, width: 6),
+                    border: Border.all(color: Colors.green, width: 6),
                     image: DecorationImage(
                       fit: BoxFit.cover,                      image: AssetImage(profileImg),
                     )                  ),                ),
@@ -85,15 +86,15 @@ class ProfileState extends State<Profile>{
         alignment: Alignment.centerLeft,
         height:  MediaQuery.of(context).size.height /7,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
           children: <Widget>[
-          Text('Jordy M', style: TextStyle(fontWeight: FontWeight.bold , fontSize: 28),),
+          Text('Jordy M', style: TextStyle(fontWeight: FontWeight.bold , fontSize: 28,color: Colors.white),),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               FloatingActionButton(heroTag: '1',onPressed:_launchCaller,child: Icon(Icons.call),backgroundColor: Colors.green, tooltip: "Llamar a esta persona",),
-              FloatingActionButton(heroTag: '2',child: Icon(Icons.add,),backgroundColor: Colors.green, tooltip: "Agregar una Mascota",),
+              FloatingActionButton(heroTag: '2',onPressed:_agregarMascota,child: Icon(Icons.add,),backgroundColor: Colors.green, tooltip: "Agregar una Mascota",),
               FloatingActionButton(heroTag: '3',onPressed: _showSettings,child: Icon(Icons.settings),backgroundColor: Colors.green, tooltip: "Ajustes",),
     ],),
           ],
@@ -126,7 +127,9 @@ class ProfileState extends State<Profile>{
       ],
     );
   }
-
+    _agregarMascota(){
+        Navigator.pushNamed(context, '/Agregar');
+  }
 
 
 }

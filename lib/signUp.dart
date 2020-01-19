@@ -19,14 +19,20 @@ class _SignUpState extends State<SignUp> {
     return Scaffold(
       appBar: null,
       body: Center(
+        heightFactor: 100,
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              buildLogo(size),
-              buildInputField("Username", true),
-              buildInputField("Password", false),
-              buildInputField("Email", true),
-              buildInputField("Celular", true),
+              Row(
+                children: <Widget>[
+                  buildLogo(size),
+                  Text("DogPrint",style: TextStyle(fontSize: 40),),
+                ],
+              ),
+              buildInputField("Nombre de Usuario", true),
+              buildInputField("Contraseña", false),
+              buildInputField("Correo Electronico", true),
+              buildInputField("Numero de Celular", true),
               buildSignUpButton(size),
               buildLoginText(size),
             ],
@@ -41,7 +47,7 @@ class _SignUpState extends State<SignUp> {
       child: Image.asset(
         "img/log.png",
         height: size.height / 4,
-        width: size.width / 2,
+        width: size.width / 3,
       ),
       margin: EdgeInsets.all(20),
     );
@@ -53,9 +59,9 @@ class _SignUpState extends State<SignUp> {
         obscureText: !visible,
         onChanged: (text) {
           setState(() {
-            if (fieldName == "Username")
+            if (fieldName == "Nombre de Usuario")
               this.username = text;
-            else if (fieldName == "Password")
+            else if (fieldName == "Contraseña")
               this.password = text;
             else
               this.email = text;
@@ -89,7 +95,7 @@ class _SignUpState extends State<SignUp> {
         shape: StadiumBorder(),
         color: Colors.green,
         splashColor: Colors.greenAccent,
-        padding: EdgeInsets.fromLTRB(size.width / 8, 15, size.width / 8, 15),
+        padding: EdgeInsets.fromLTRB(size.width / 3, 15, size.width / 3, 15),
       ),
     );
   }
@@ -100,10 +106,10 @@ class _SignUpState extends State<SignUp> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Text("Already Have an account, "),
+          Text("Ya tienes una cuenta?, "),
           InkWell(
             child: Text(
-              "Login from here.",
+              "Ingresa aqui.",
               style: TextStyle(
                 color: Colors.lightBlue,
                 fontWeight: FontWeight.bold,

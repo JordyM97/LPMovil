@@ -11,17 +11,14 @@ class MascotasState extends State<Mascotas>{
       "name": "Peluche",
       "raza": "French Poodle",
       "edad": 8,
-      "img": "img/d1.jpeg"
+      "img": "img/d1.jpeg",
+      "dueño":"jordy"
     },{
       "name": "Chin Chin",
       "raza": "Caniche Toy",
       "edad": 2,
-      "img": "img/b1.jpg"
-    },{
-      "name": "Firulais",
-      "raza": "Pastor Aleman",
-      "edad": 4,
-      "img": "img/p1.jpg"
+      "img": "img/b1.jpg",
+      "dueño":"jordy"
     },
   ];
   @override

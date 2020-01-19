@@ -23,21 +23,19 @@ class _DetallesMascotaState extends State<DetallesMascota> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.black,
       ),
-
       body: SafeArea(
-        child: Column(
-          children: <Widget>[
-            Expanded(
-              child: buildCard(),
-              flex: 6,
-            ),
-            Expanded(
-              flex: 4,
-              child: buildDescription(),
-            ),
-          ],
+        child: Container(
+          color: Colors.black54,
+          child: Column(
+            children: <Widget>[
+                Expanded(
+                  child: buildCard(),
+                  flex: 6,
+                ),
+              ],
+          ),
         ),
       ),
 
@@ -49,7 +47,7 @@ class _DetallesMascotaState extends State<DetallesMascota> {
   Widget buildCard() {
     return Card(
       elevation: 10,
-      margin: EdgeInsets.fromLTRB(40, 20, 40, 20),
+      margin: EdgeInsets.fromLTRB(20, 60, 20, 60),
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
@@ -67,7 +65,7 @@ class _DetallesMascotaState extends State<DetallesMascota> {
                 ),
                 padding: EdgeInsets.all(20),
               ),
-              flex: 7,
+              flex: 5,
             ),
             Expanded(
               child: Row(
@@ -75,34 +73,66 @@ class _DetallesMascotaState extends State<DetallesMascota> {
                   Expanded(
                     child: Column(
                       children: <Widget>[
-                        Container(
-                          child: Text("${widget.raza}",
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 1,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w800,
-                                  color: Colors.white)),
-                          padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
-                          margin: EdgeInsets.only(top: 5),
-                          decoration: BoxDecoration(
-                              color: Color(0xff36004f),
-                              borderRadius: BorderRadius.circular(15)),
-                        ),
+                        Text("${widget.nombre}",style: TextStyle(fontSize: 35,fontWeight: FontWeight.w900), ),
+                        Divider(thickness:3,indent: 6,endIndent: 6,),
+                        buildText("${widget.raza}",Colors.green),
+                        buildText("${widget.edad} Años",Colors.green),
+                        Divider(thickness:5,indent: 3,endIndent: 3,),
+                        GestureDetector(onTap: (()=>{
+                            Reportar()
+                          }),child: buildText("Reportar como Perdido",Colors.redAccent))
                       ],
                     ),
                   ),
-
                 ],
               ),
-              flex: 1,
+              flex: 3,
             )
           ],
         ),
       ),
     );
   }
-
-
+  Reportar(){
+     return showDialog(
+        context: context,
+        builder: (context) => new AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(30))),
+          elevation: 20,
+          title: Icon(Icons.error_outline,color: Colors.redAccent,),
+          content: new Text('Desear reportarlo como perdido?'),
+          actions: <Widget>[
+            new FlatButton(
+              child: new Text("No"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            new FlatButton(
+              child: new Text("Si"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        )
+    );
+  }
+  Widget buildText(String texto,Color _color){
+    return Container(
+      child: Text(texto,
+          overflow: TextOverflow.ellipsis,
+          maxLines: 1,
+          style: TextStyle(
+              fontWeight: FontWeight.w800,
+              color: Colors.white,fontSize: 20)),
+      padding: EdgeInsets.fromLTRB(10, 5, 10, 10),
+      margin: EdgeInsets.only(top: 10),
+      decoration: BoxDecoration(
+          color: _color,
+          borderRadius: BorderRadius.circular(15)),
+    );
+  }
   Widget buildProduct() {
     return Container(
       height: 200.0,

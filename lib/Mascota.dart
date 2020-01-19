@@ -25,17 +25,17 @@ class Mascota extends StatelessWidget{
   }
   Widget buildCard(BuildContext context) {
     return Card(
-
+        elevation: 20,
+        borderOnForeground: true,
         child: Hero(
           tag: name,
           child: Material(
-
+            borderRadius: BorderRadius.circular(10),
+            elevation: 20,
             child:InkWell(
-
-
               child: GridTile(
                 child: Image.asset(img),
-                footer: Text(edad.toString()+" | " +raza, textAlign: TextAlign.left, style: TextStyle( fontSize: 18,fontStyle: FontStyle.italic )),
+                footer: Text("   "+edad.toString()+" | " +raza, textAlign: TextAlign.left, style: TextStyle( fontSize: 18,fontStyle: FontStyle.italic )),
                 header: Text(name, textAlign: TextAlign.center,style: TextStyle( fontSize: 22, fontWeight: FontWeight.bold)),
 
               ),

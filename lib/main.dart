@@ -1,3 +1,4 @@
+import 'package:dogprint/AgregarMascota.dart';
 import 'package:dogprint/BNavigationBar.dart';
 import 'package:dogprint/home.dart';
 import 'package:dogprint/login.dart';
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
         '/signUp': (context) => SignUp(),
         '/login': (context) => Login(),
         '/Home': (context) => BNavigationBar(),
+        '/Agregar': (context) => AgregarMascota(),
       },
 
       //MyHomePage(title: 'Flutter Demo Home Page'),

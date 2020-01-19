@@ -17,21 +17,40 @@ class _LoginState extends State<Login> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar:null,
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              Text("DogPrint"),
-              buildLogo(size),
-              buildInputField("Username", true),
-              buildInputField("Password", passwordVisibility, bottom: 5.0),
-              buildForgotPassword(),
-              buildLoginButton(size),
-              buildSignUpText(size),
+      body:SafeArea(
+        child:    Container(
+
+        child: Container(
+          decoration: BoxDecoration(
+              boxShadow: [BoxShadow( color: Colors.black54, blurRadius: 0.0)],
+              borderRadius: BorderRadius.all(Radius.circular(0)),gradient: LinearGradient(
+              begin:Alignment.centerRight,end:Alignment.bottomLeft,
+              colors: [Colors.black87,Colors.black54, Colors.black45])),
+              child:Container(
+                        decoration: BoxDecoration(
+                boxShadow: [BoxShadow( color: Colors.white, blurRadius: 10.0)],
+                borderRadius: BorderRadius.all(Radius.circular(20)),gradient: LinearGradient(
+                begin:Alignment.centerRight,end:Alignment.bottomLeft,
+                colors: [Colors.white70,Colors.white54, Colors.white24])),
+                  child:Column(
+
+                      children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            buildLogo(size),
+                            Text("DogPrint",style: TextStyle(fontSize: 40),),
+                          ],
+                        ),
+                        buildInputField("Nombre de Usuario", true),
+                     buildInputField("Contraseña", passwordVisibility, bottom: 5.0),
+                     buildForgotPassword(),
+                     buildLoginButton(size),
+                     buildSignUpText(size),
             ],
-          ),
+          ),),
         ),
       ),
+      )
     );
   }
 
@@ -77,9 +96,7 @@ class _LoginState extends State<Login> {
     return Container(
       margin: EdgeInsets.only(top: 20, bottom: 20),
       child: FlatButton(
-        onPressed: () {
-          Navigator.pushNamed(context, '/Home');
-        },
+        onPressed: ValidarCreedenciales,
         child: Text(
           "Login",
           style: TextStyle(color: Colors.white, fontSize: 20),
@@ -87,21 +104,35 @@ class _LoginState extends State<Login> {
         shape: StadiumBorder(),
         color: Colors.green,
         splashColor: Colors.greenAccent,
-        padding: EdgeInsets.fromLTRB(size.width / 8, 15, size.width / 8, 15),
+        padding: EdgeInsets.fromLTRB(size.width / 3, 15, size.width / 3, 15),
       ),
     );
   }
-
+  ValidarCreedenciales(){
+    if(username=="jordy" && password=="123"){
+      Navigator.pushNamed(context, '/Home');
+    }else{
+      return showDialog(
+          context: context,
+          builder: (context) => new AlertDialog(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(30))),
+            elevation: 20,
+            title: Icon(Icons.error_outline,color: Colors.redAccent,),
+            content: new Text('Las credenciales no coinciden...'),
+      )
+      );
+    }
+  }
   Widget buildSignUpText(Size size) {
     return Container(
       margin: EdgeInsets.only(bottom: 20, top: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Text("Don't Have an account yet, "),
+          Text("Todavia no tienes una cuenta? "),
           InkWell(
             child: Text(
-              "SignUp Now",
+              "Registrarse",
               softWrap: true,
               style: TextStyle(
                 color: Colors.blueAccent,
@@ -135,7 +166,7 @@ class _LoginState extends State<Login> {
       child: Align(
           child: InkWell(
             child: Text(
-              "Forgot Password?!",
+              "¿Olvidaste la contraseña?",
               style: TextStyle(
                 color: Color(0xff325da3),
                 fontWeight: FontWeight.bold,
@@ -152,12 +183,12 @@ class _LoginState extends State<Login> {
     return showDialog(
       context: context,
       builder: (context) => new AlertDialog(
-        title: new Text('You Really Forgot Your Password?!!!'),
-        content: new Text('Are you really that dumb?'),
+        title: new Text('Tranquilo, no pasa nada!'),
+        content: new Text('¿Deseas que te enviemos un correo con tu contraseña?'),
         actions: <Widget>[
           new FlatButton(
             onPressed: () => Navigator.of(context).pop(true),
-            child: new Text('Yes'),
+            child: new Text('Si'),
           ),
           new FlatButton(
             onPressed: () => Navigator.of(context).pop(false),
@@ -168,4 +199,5 @@ class _LoginState extends State<Login> {
     ) ??
         false;
   }
+
 }
