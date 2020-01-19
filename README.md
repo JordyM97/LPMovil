@@ -8,8 +8,8 @@ DogPrint es una app creada en flutter
 -[Leonardo Gomez]
 
 ------
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+- [Video del App (Flutter Tested on Android)  ](https://youtu.be/Qdc-JgSPhzw)
+- [Widgets utilizados en Flutter CookBook](https://flutter.dev/docs/cookbook)
 
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
