@@ -1,12 +1,8 @@
 # Dogprint
 
-DogPrint
+DogPrint es una app creada en flutter
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-Integrantes:
+## Integrantes:
 -[Jordy Medina]
 -[Ana Carrion]
 -[Leonardo Gomez]
