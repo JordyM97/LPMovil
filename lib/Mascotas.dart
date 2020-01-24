@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dogprint/Listas.dart';
 import 'package:dogprint/Mascota.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -6,6 +8,7 @@ class Mascotas extends StatefulWidget{
   MascotasState createState()=> MascotasState();
 }
 class MascotasState extends State<Mascotas>{
+  final database= Firestore.instance;
   final list=[
     {
       "name": "Peluche",
@@ -21,17 +24,23 @@ class MascotasState extends State<Mascotas>{
       "dueño":"jordy"
     },
   ];
+  List lista;
   @override
   Widget build(BuildContext context) {
+    database.collection("perros").where("dueño", isEqualTo: Listas.username).snapshots()
+        .listen((data) => {
+          lista=data.documents.toList()
+    }
+        );
     return GridView.builder(
-        itemCount: list.length,
+        itemCount: lista.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
         itemBuilder: (BuildContext context, int index){
           return Mascota(
-            name: list[index]['name'],
-            edad: list[index]['edad'],
-            img: list[index]['img'],
-            raza: list[index]['raza'],
+            name: lista[index]['name'],
+            edad: lista[index]['edad'],
+            img: lista[index]['img'],
+            raza: lista[index]['raza'],
             );
         });
 

@@ -58,10 +58,10 @@ class _DetallesMascotaState extends State<DetallesMascota> {
           children: <Widget>[
             Expanded(
               child: Container(
-                child: Image.asset(
+                child: Image.network(
                   widget.img,
                   fit: BoxFit.fill,
-                  width: MediaQuery.of(context).size.width - 80,
+                  width: MediaQuery.of(context).size.width,
                 ),
                 padding: EdgeInsets.all(20),
               ),

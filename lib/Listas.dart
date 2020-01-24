@@ -1,5 +1,10 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Listas{
+  static String username;
+  static List lista;
+  static List glob;
   final list=[
 
     {

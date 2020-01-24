@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dogprint/Listas.dart';
 import 'package:dogprint/User.dart';
 import 'package:flutter/material.dart';
 
@@ -130,7 +131,7 @@ class _LoginState extends State<Login> {
     if(username.length!=null){
       CollectionReference col=database.collection("usuarios");
       col.document(username).get().then((onValue){
-        onValue.exists ?    validarpass(onValue) : mostrarvent();});
+        onValue.exists ?    validarpass(onValue,username) : mostrarvent();});
     }else{
       mostrarvent();
     }
@@ -155,9 +156,18 @@ class _LoginState extends State<Login> {
 
 
   }
-  validarpass(DocumentSnapshot d){
+  validarpass(DocumentSnapshot d,String username){
     if(d.data["pass"]==password){
       Navigator.pushNamed(context, '/Home');
+      Listas.username=username;
+      database.collection("perros").where("dueño", isEqualTo: Listas.username).snapshots()
+          .listen((data) => {
+        Listas.lista=data.documents.toList()
+      });
+      database.collection("perros").where("especie", isNull: false).snapshots().listen((data) => {
+        Listas.glob=data.documents.toList(),
+        print(data.documents.toList().length)
+      });
     }
   }
   mostrarvent(){

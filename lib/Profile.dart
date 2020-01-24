@@ -1,4 +1,5 @@
 
+import 'package:dogprint/Listas.dart';
 import 'package:dogprint/Mascotas.dart';
 import 'package:dogprint/User.dart';
 import 'package:flutter/material.dart';
@@ -96,7 +97,7 @@ class ProfileState extends State<Profile>{
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
           children: <Widget>[
-          Text('Jordy M', style: TextStyle(fontWeight: FontWeight.bold , fontSize: 28,color: Colors.white),),
+          Text(Listas.username, style: TextStyle(fontWeight: FontWeight.bold , fontSize: 28,color: Colors.white),),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[

@@ -32,6 +32,7 @@ class DateState extends State<Date>{
                     if(!snapshot.hasData){
                       return Container(color: Colors.black,child:Center(            child: CircularProgressIndicator(),            ));
                     }
+                    Listas.lista=snapshot.data.documents.toList();
                     return buildDates();
                   },
                 )
@@ -96,7 +97,7 @@ class DateState extends State<Date>{
           Raza_Seleccionada = newValue;
         });
       },
-      items: <String>['Caniche Toy', 'Pastor Alemnan', 'Poodle']
+      items: <String>['Golden Retriever', 'Doberman', 'Pug', 'Lobo Siberiano', 'BullDog','Persa','Tonkines','Laperm','Bumilla']
           .map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
@@ -139,95 +140,100 @@ class DateState extends State<Date>{
   Widget buildDates(){
     PageController controller= PageController(viewportFraction: 0.9,initialPage: 1);
     List<Widget> dates= new List<Widget>();
-    List list=Listas().list;
+    List list=Listas.lista;
     for(int i=0;i<list.length;i++){
       if(list[i]["especie"]==Especie_Seleccionado) {
-        var carta = Padding(
-          padding: EdgeInsets.all(5),
-          child: Container(
+        if(list[i]["raza"]==Raza_Seleccionada) {
+          var carta = Padding(
+            padding: EdgeInsets.all(5),
+            child: Container(
 
-            child: Stack(
-              fit: StackFit.expand,
-              children: <Widget>[
-                Container(
+              child: Stack(
+                fit: StackFit.expand,
+                children: <Widget>[
+                  Container(
 
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                      boxShadow: [
-                        BoxShadow(color: Colors.black38, blurRadius: 5.0)
-                      ]
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        boxShadow: [
+                          BoxShadow(color: Colors.black38, blurRadius: 5.0)
+                        ]
+                    ),
                   ),
-                ),
-                ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
-                  child: Image.network(
-                    list[i]["img"],
-                    fit: BoxFit.cover,
+                  ClipRRect(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    child: Image.network(
+                      list[i]["img"],
+                      fit: BoxFit.cover,
+                    ),
                   ),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                      gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [Colors.transparent, Colors.black]
-                      )
+                  Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [Colors.transparent, Colors.black]
+                        )
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(30),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(list[i]["name"], style: TextStyle(fontSize: 32,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),),
-                      Text(list[i]["edad"].toString() + " Años",
-                        style: TextStyle(fontSize: 20, color: Colors.white),),
+                  Padding(
+                    padding: EdgeInsets.all(30),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(list[i]["name"], style: TextStyle(fontSize: 32,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),),
+                        Text(list[i]["edad"].toString() + " Años",
+                          style: TextStyle(fontSize: 20, color: Colors.white),),
 
 
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: <Widget>[
 
-                      Padding(
-                        padding: EdgeInsets.only(bottom: 10, right: 20),
-                        child: Text(list[i]["dueño"],
-                          style: TextStyle(fontSize: 25, color: Colors.white),
-                          textAlign: TextAlign.center,),
-                      ),
-                      GestureDetector(onTap: _launchCaller,
-                          child: Container(
-                            padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-                            decoration: BoxDecoration(borderRadius: BorderRadius
-                                .circular(40), color: Colors.green,
+                        Padding(
+                          padding: EdgeInsets.only(bottom: 10, right: 20),
+                          child: Text(list[i]["dueño"],
+                            style: TextStyle(fontSize: 25, color: Colors.white),
+                            textAlign: TextAlign.center,),
+                        ),
+                        GestureDetector(onTap: _launchCaller,
+                            child: Container(
+                              padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius
+                                      .circular(40), color: Colors.green,
 
-                                boxShadow: [
-                                  BoxShadow(color: Colors.white, blurRadius: 10)
-                                ]),
-                            child: Icon(Icons.call, color: Colors.white,
-                              size: 50,),
-                          )
-                      ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.white, blurRadius: 10)
+                                  ]),
+                              child: Icon(Icons.call, color: Colors.white,
+                                size: 50,),
+                            )
+                        ),
 
-                    ],
+                      ],
+                    ),
                   ),
-                ),
 
 
-              ],
+                ],
+              ),
             ),
-          ),
-        );
-        dates.add(carta);
+          );
+
+          dates.add(carta);
+        }
       }
     }
 

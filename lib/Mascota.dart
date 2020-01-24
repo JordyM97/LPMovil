@@ -34,7 +34,7 @@ class Mascota extends StatelessWidget{
             elevation: 20,
             child:InkWell(
               child: GridTile(
-                child: Image.asset(img),
+                child: Image.network(img,fit: BoxFit.cover,),
                 footer: Text("   "+edad.toString()+" | " +raza, textAlign: TextAlign.left, style: TextStyle( fontSize: 18,fontStyle: FontStyle.italic )),
                 header: Text(name, textAlign: TextAlign.center,style: TextStyle( fontSize: 22, fontWeight: FontWeight.bold)),
 
