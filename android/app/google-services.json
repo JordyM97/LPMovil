@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "619919121017",
+    "firebase_url": "https://flutter-dogprint.firebaseio.com",
+    "project_id": "flutter-dogprint",
+    "storage_bucket": "flutter-dogprint.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:619919121017:android:d286bca5c8aa34aefc12a8",
+        "android_client_info": {
+          "package_name": "dogprint.dogprint"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "619919121017-ej3ikscvpe31md2571rimgfl4ok25n9o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_d1cvOeyYkNOVgH66Bc98pNzqZo8bUZQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "619919121017-ej3ikscvpe31md2571rimgfl4ok25n9o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
