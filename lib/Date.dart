@@ -1,4 +1,5 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dogprint/Listas.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
@@ -25,7 +26,15 @@ class DateState extends State<Date>{
               children: <Widget>[
                 buildHeader(),
                 buildFilters(),
-                buildDates(),
+                StreamBuilder(
+                  stream: Firestore.instance.collection("perros").snapshots(),
+                  builder: (context, AsyncSnapshot<QuerySnapshot> snapshot){
+                    if(!snapshot.hasData){
+                      return Container(color: Colors.black,child:Center(            child: CircularProgressIndicator(),            ));
+                    }
+                    return buildDates();
+                  },
+                )
               ],
             ),
           )

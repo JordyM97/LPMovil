@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dogprint/Listas.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ class FindState extends State<Find>{
     String busqueda_Seleccionado="Raza";
     @override
     Widget build(BuildContext context) {
+      Listas().list.asMap();
       return Scaffold(
         appBar: null,
         body: Container(
@@ -31,16 +33,128 @@ class FindState extends State<Find>{
                   buildHeader(),
                   buildFilters(),
                   Expanded(
-                    child:buildFeed(),
+                    child:buildBody(),
                   )
                 ],
               ),
             )
-
-
-        ),
+        )
       );
   }
+
+    Widget buildBody(){
+      return StreamBuilder(
+        stream: Firestore.instance.collection("perros").snapshots(),
+        builder: (context, AsyncSnapshot<QuerySnapshot> snapshot){
+          if(!snapshot.hasData){
+            return Container(color: Colors.black,child:Center(            child: CircularProgressIndicator(),            ));
+          }
+
+          return buildFeedIn(snapshot);
+        },
+      );
+    }
+    Widget buildFeedIn(AsyncSnapshot<QuerySnapshot> snapshot){
+      PageController controller = PageController(viewportFraction: 0.9, initialPage: 1);
+      List<Widget> list=snapshot.data.documents.map((DocumentSnapshot document){
+        return new Padding(
+          padding: EdgeInsets.all(5),
+          child: Container(
+            child: Stack(
+              fit: StackFit.expand,
+              children: <Widget>[
+                Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                      boxShadow: [                         BoxShadow(color: Colors.black38, blurRadius: 5.0)                        ]
+                  ),
+                ),
+                ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  child: Image.network(
+                    document["img"],
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                      gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [Colors.transparent, Colors.black]
+                      )
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(30),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(document["name"], style: TextStyle(fontSize: 32,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),),
+                      Text(document["edad"].toString() + " Años",
+                        style: TextStyle(fontSize: 20, color: Colors.white),),
+
+
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: <Widget>[
+
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 10, right: 20),
+                        child: Text(document["dueño"],
+                          style: TextStyle(fontSize: 25, color: Colors.white),
+                          textAlign: TextAlign.center,),
+                      ),
+                      GestureDetector(onTap: _launchCaller,
+                          child: Container(
+                            padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius
+                                    .circular(40), color: Colors.green,
+
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.white, blurRadius: 10)
+                                ]),
+                            child: Icon(Icons.call, color: Colors.white,
+                              size: 50,),
+                          )
+                      ),
+
+                    ],
+                  ),
+                ),
+
+
+              ],
+            ),
+          ),
+        );
+      }).toList();
+      return Container(
+        width: MediaQuery
+            .of(context)
+            .size
+            .width,
+        height: MediaQuery.of(context).size.height/2,
+        child: PageView(
+          controller: controller,
+          scrollDirection: Axis.vertical,
+          children: list,
+        )
+      );
+
+    }
     Widget buildHeader() {
       return Column(
           children: <Widget>[
@@ -173,7 +287,8 @@ class FindState extends State<Find>{
             .toList(),
       );
     }
-    Widget buildFeed() {
+
+     Widget buildFeed() {
       PageController controller = PageController(
           viewportFraction: 0.9, initialPage: 1);
       List<Widget> dates = new List<Widget>();

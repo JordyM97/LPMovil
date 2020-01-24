@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class SignUp extends StatefulWidget {
@@ -9,7 +10,8 @@ class _SignUpState extends State<SignUp> {
   String username;
   String password;
   String email;
-
+  String telf;
+  final database= Firestore.instance;
   String errorUsernamePassword; // name and password error msg are the same
   String errorEmail;
 
@@ -63,8 +65,8 @@ class _SignUpState extends State<SignUp> {
               this.username = text;
             else if (fieldName == "Contraseña")
               this.password = text;
-            else
-              this.email = text;
+            else if (fieldName == "Numero de Celular")
+              this.telf = text;
           });
         },
         style: TextStyle(fontSize: 18),
@@ -85,7 +87,7 @@ class _SignUpState extends State<SignUp> {
       margin: EdgeInsets.only(top: 20, bottom: 20),
       child: FlatButton(
         onPressed: () {
-          
+          createRecord();
           Navigator.pushNamed(context, '/login');
         },
         child: Text(
@@ -99,7 +101,17 @@ class _SignUpState extends State<SignUp> {
       ),
     );
   }
+  void createRecord() async {
+    await database.collection("usuarios")
+        .document(username)
+        .setData({
+      'user': username,
+      'pass': password,
+      'telf': telf,
+    });
 
+
+  }
   Widget buildLoginText(Size size) {
     return Container(
       margin: EdgeInsets.only(bottom: 20, top: 10),

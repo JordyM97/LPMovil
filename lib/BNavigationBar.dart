@@ -6,11 +6,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class BNavigationBar extends StatefulWidget{
+  String user;
+  BNavigationBar({Key key, @required this.user}) : super(key: key);
   @override
   _BNavigationBat createState()=> _BNavigationBat();
 }
 class _BNavigationBat extends State<BNavigationBar>{
-  int _currentIndex=1;
+
+  int _currentIndex=2;
 
   final List<Widget> _children=[
     Date(), Find(), Profile(),

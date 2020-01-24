@@ -1,16 +1,23 @@
 
 import 'package:dogprint/Mascotas.dart';
+import 'package:dogprint/User.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 
 class Profile extends StatefulWidget{
+  String user;
+  Profile({Key key, @required this.user}) : super(key: key);
   @override
   ProfileState createState()=> ProfileState();
 }
 class ProfileState extends State<Profile>{
+
+
   final profileImg='img/c1.jpg';
   @override
   Widget build(BuildContext context) {
+    print(widget.user);
+
     return Scaffold(
       appBar: null,
       body:Container(
